@@ -19,6 +19,15 @@ export default {
 		},
 		extend: {
 			colors: {
+				// MusicLinks Custom Palette
+				'ml-charcoal': '#353535',
+				'ml-teal': '#3C6E71',
+				'ml-white': '#FFFFFF',
+				'ml-light-gray': '#D9D9D9',
+				'ml-navy': '#284B63',
+				'ml-black': '#000000',
+				
+				// Shadcn UI colors (keeping existing for compatibility)
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
