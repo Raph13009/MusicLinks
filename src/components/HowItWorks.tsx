@@ -1,6 +1,8 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Search, Users, Music } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const steps = [
   {
@@ -74,6 +76,20 @@ const HowItWorks = () => {
               </div>
             );
           })}
+        </div>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-16">
+          <Link to="/signup">
+            <Button size="lg" className="bg-ml-teal hover:bg-ml-navy text-white font-semibold px-8 py-4 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-300">
+              Créer mon profil
+            </Button>
+          </Link>
+          <Link to="/providers">
+            <Button size="lg" variant="outline" className="border-2 border-ml-charcoal/20 text-ml-charcoal hover:bg-ml-charcoal hover:text-white font-semibold px-8 py-4 rounded-full text-lg transition-all duration-300">
+              Explorer les prestataires
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

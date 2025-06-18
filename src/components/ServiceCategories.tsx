@@ -9,7 +9,7 @@ const categories = [
     title: 'Audio & Son',
     description: 'Ingénieurs son, mixage, mastering, beatmakers',
     icon: Music,
-    color: 'bg-gradient-to-br from-purple-500 to-pink-500',
+    color: 'bg-gradient-to-br from-purple-500 to-purple-600',
     count: '120+ pros'
   },
   {
@@ -17,7 +17,7 @@ const categories = [
     title: 'Vidéo & Clips',
     description: 'Réalisateurs, monteurs, motion designers',
     icon: Youtube,
-    color: 'bg-gradient-to-br from-blue-500 to-cyan-500',
+    color: 'bg-gradient-to-br from-blue-500 to-blue-600',
     count: '85+ pros'
   },
   {
@@ -25,7 +25,7 @@ const categories = [
     title: 'Marketing Musical',
     description: 'Social media, promotion, stratégie digitale',
     icon: Search,
-    color: 'bg-gradient-to-br from-green-500 to-emerald-500',
+    color: 'bg-gradient-to-br from-green-500 to-green-600',
     count: '95+ pros'
   },
   {
@@ -33,7 +33,7 @@ const categories = [
     title: 'Formation & Coaching',
     description: 'Coachs vocaux, professeurs, mentorat artistique',
     icon: Users,
-    color: 'bg-gradient-to-br from-orange-500 to-yellow-500',
+    color: 'bg-gradient-to-br from-orange-500 to-orange-600',
     count: '70+ pros'
   },
   {
@@ -41,7 +41,7 @@ const categories = [
     title: 'Juridique & Business',
     description: 'Avocats spécialisés, managers, consultants',
     icon: Book,
-    color: 'bg-gradient-to-br from-red-500 to-pink-500',
+    color: 'bg-gradient-to-br from-red-500 to-red-600',
     count: '40+ pros'
   }
 ];

@@ -102,7 +102,7 @@ const Header = () => {
             >
               Comment ça marche
             </Link>
-            <div className="pt-4 space-y-3">
+            <div className="pt-4 space-y-4">
               <Link to="/login" onClick={() => setIsMenuOpen(false)}>
                 <Button variant="outline" className="w-full rounded-full border-ml-light-gray/50">
                   Connexion

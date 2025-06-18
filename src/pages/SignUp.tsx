@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -8,18 +8,26 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { ArrowLeft } from 'lucide-react';
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
     password: '',
-    name: '',
+    confirmPassword: '',
     role: '',
     acceptTerms: false
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      alert('Les mots de passe ne correspondent pas');
+      return;
+    }
     console.log('Inscription:', formData);
-    // Ici on intégrerait avec Supabase plus tard
+    // Simulation de création de compte réussie
+    alert('Compte créé avec succès !');
+    navigate('/providers'); // Redirection après inscription
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,6 +65,19 @@ const SignUp = () => {
         <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/10">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
+              <Label htmlFor="name" className="text-white font-medium">Nom complet ou nom d'artiste</Label>
+              <Input
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-ml-teal focus:ring-ml-teal rounded-xl"
+                placeholder="John Doe"
+              />
+            </div>
+
+            <div className="space-y-2">
               <Label htmlFor="email" className="text-white font-medium">Email</Label>
               <Input
                 id="email"
@@ -85,15 +106,16 @@ const SignUp = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="name" className="text-white font-medium">Nom complet ou nom d'artiste</Label>
+              <Label htmlFor="confirmPassword" className="text-white font-medium">Confirmer le mot de passe</Label>
               <Input
-                id="name"
-                name="name"
-                value={formData.name}
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                value={formData.confirmPassword}
                 onChange={handleChange}
                 required
                 className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-ml-teal focus:ring-ml-teal rounded-xl"
-                placeholder="John Doe"
+                placeholder="••••••••"
               />
             </div>
 

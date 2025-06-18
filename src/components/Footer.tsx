@@ -18,11 +18,6 @@ const Footer = () => {
               MusicLinks connecte les artistes avec les meilleurs prestataires musicaux. 
               Trouvez votre ingénieur son, clipmaker ou coach musical de confiance.
             </p>
-            <div className="text-sm text-ml-light-gray/60 space-y-1">
-              <p>Projet porté par Nicolas Bohbot</p>
-              <p>Email : musiclinksplatform@gmail.com</p>
-              <p>Hébergement : Vercel</p>
-            </div>
           </div>
 
           {/* Liens Rapides */}
@@ -72,7 +67,7 @@ const Footer = () => {
 
         <div className="border-t border-ml-navy/50 mt-12 pt-8">
           <p className="text-ml-light-gray/60 text-sm text-center">
-            © 2024 MusicLinks. RGPD : les utilisateurs peuvent demander la suppression de leurs données à tout moment. 
+            © 2025 MusicLinks. RGPD : les utilisateurs peuvent demander la suppression de leurs données à tout moment. 
             Les cookies sont utilisés pour le fonctionnement du site. En utilisant ce site, vous acceptez les CGU.
           </p>
         </div>

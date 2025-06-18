@@ -1,47 +1,69 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { Search, Plus, Calendar, MapPin, DollarSign } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Plus, MapPin, Calendar, User } from 'lucide-react';
 
 const Projects = () => {
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [projectData, setProjectData] = useState({
+    title: '',
+    description: '',
+    category: '',
+    location: '',
+    budget: ''
+  });
+
+  const handleCreateProject = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Création de projet:', projectData);
+    alert('Projet créé avec succès !');
+    setIsCreateDialogOpen(false);
+    setProjectData({ title: '', description: '', category: '', location: '', budget: '' });
+  };
+
   const mockProjects = [
     {
       id: 1,
-      title: "Recherche ingénieur son pour album rap",
+      title: "Recherche beatmaker pour EP",
+      description: "Je cherche un beatmaker pour produire 5 instrumentales dans le style trap/hip-hop. Projet prévu pour mars 2025.",
       author: "MC Flow",
-      category: "Audio",
-      budget: "2500€",
-      location: "Paris",
-      deadline: "Dans 2 semaines",
-      description: "Je recherche un ingénieur son expérimenté pour le mixage et mastering de mon premier album rap (12 titres).",
-      status: "open"
+      category: "Production",
+      location: "Paris, France",
+      budget: "Non spécifié",
+      status: "Ouvert",
+      postedAt: "Il y a 2 jours",
+      applicants: 12
     },
     {
       id: 2,
-      title: "Clip vidéo pour single pop",
-      author: "Luna Artist",
+      title: "Clip vidéo pour single",
+      description: "Artiste pop recherche réalisateur créatif pour clip vidéo. Concept artistique déjà défini, besoin d'une équipe pro.",
+      author: "Luna Music",
       category: "Vidéo",
-      budget: "1200€",
-      location: "Lyon",
-      deadline: "Dans 1 mois",
-      description: "Besoin d'un clipmaker créatif pour réaliser le clip de mon nouveau single pop. Style moderne et coloré souhaité.",
-      status: "open"
+      location: "Lyon, France",
+      budget: "Non spécifié",
+      status: "Ouvert",
+      postedAt: "Il y a 1 semaine",
+      applicants: 8
     },
     {
       id: 3,
-      title: "Coach vocal pour préparation scène",
-      author: "The Harmonics",
-      category: "Formation",
-      budget: "800€",
-      location: "Marseille",
-      deadline: "Flexible",
-      description: "Groupe cherche coach vocal pour préparer une tournée. Sessions intensives souhaitées.",
-      status: "open"
+      title: "Mixage album complet",
+      description: "Groupe rock indé cherche ingénieur son pour mixer 10 titres. Enregistrement déjà terminé, besoin expertise technique.",
+      author: "The Rebels",
+      category: "Audio",
+      location: "Marseille, France",
+      budget: "Non spécifié",
+      status: "En cours",
+      postedAt: "Il y a 3 jours",
+      applicants: 15
     }
   ];
 
@@ -51,102 +73,153 @@ const Projects = () => {
       
       <main className="pt-8">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-ml-navy/10 to-ml-teal/10 py-16">
+        <section className="bg-gradient-to-r from-ml-teal/10 to-ml-navy/10 py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h1 className="text-4xl md:text-5xl font-bold text-ml-charcoal mb-4">
                 Projets musicaux
               </h1>
-              <p className="text-xl text-ml-charcoal/70 max-w-2xl mx-auto mb-8">
-                Découvrez des opportunités de collaboration ou publiez votre projet
+              <p className="text-xl text-ml-charcoal/70 max-w-2xl mx-auto">
+                Découvrez des projets passionnants ou publiez le vôtre pour trouver les collaborateurs parfaits
               </p>
-              
-              <Link to="/create-project">
-                <Button size="lg" className="bg-ml-teal hover:bg-ml-navy rounded-full px-8 py-3 text-lg font-semibold">
-                  <Plus className="mr-2 h-5 w-5" />
-                  Publier un projet
-                </Button>
-              </Link>
             </div>
 
-            {/* Barre de recherche */}
-            <div className="max-w-4xl mx-auto">
-              <div className="bg-white rounded-2xl shadow-lg p-6">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="md:col-span-2">
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-ml-charcoal/40 h-5 w-5" />
+            {/* CTA Button */}
+            <div className="text-center">
+              <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button size="lg" className="bg-ml-teal hover:bg-ml-navy text-white font-semibold px-8 py-4 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                    <Plus className="mr-2 h-5 w-5" />
+                    Publier un projet
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>Créer un nouveau projet</DialogTitle>
+                  </DialogHeader>
+                  <form onSubmit={handleCreateProject} className="space-y-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="title">Titre du projet</Label>
                       <Input
-                        placeholder="Rechercher un projet..."
-                        className="pl-10 border-ml-light-gray/30 focus:border-ml-teal rounded-xl"
+                        id="title"
+                        value={projectData.title}
+                        onChange={(e) => setProjectData({...projectData, title: e.target.value})}
+                        placeholder="Ex: Recherche beatmaker pour EP"
+                        required
                       />
                     </div>
-                  </div>
-                  <Button className="bg-ml-teal hover:bg-ml-navy rounded-xl">
-                    <Search className="h-4 w-4 mr-2" />
-                    Rechercher
-                  </Button>
-                </div>
-              </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="category">Catégorie</Label>
+                      <Select value={projectData.category} onValueChange={(value) => setProjectData({...projectData, category: value})}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Sélectionner une catégorie" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="audio">Audio & Son</SelectItem>
+                          <SelectItem value="video">Vidéo & Clips</SelectItem>
+                          <SelectItem value="marketing">Marketing Musical</SelectItem>
+                          <SelectItem value="training">Formation & Coaching</SelectItem>
+                          <SelectItem value="legal">Juridique & Business</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="description">Description</Label>
+                      <Textarea
+                        id="description"
+                        value={projectData.description}
+                        onChange={(e) => setProjectData({...projectData, description: e.target.value})}
+                        placeholder="Décrivez votre projet en détail..."
+                        rows={4}
+                        required
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="location">Localisation (optionnel)</Label>
+                      <Input
+                        id="location"
+                        value={projectData.location}
+                        onChange={(e) => setProjectData({...projectData, location: e.target.value})}
+                        placeholder="Ex: Paris, France"
+                      />
+                    </div>
+
+                    <Button type="submit" className="w-full bg-ml-teal hover:bg-ml-navy">
+                      Publier le projet
+                    </Button>
+                  </form>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </section>
 
-        {/* Liste des projets */}
+        {/* Projects List */}
         <section className="py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-8">
-              <h2 className="text-2xl font-bold text-ml-charcoal mb-2">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-2xl font-bold text-ml-charcoal">
                 {mockProjects.length} projets disponibles
               </h2>
-              <p className="text-ml-charcoal/60">
-                Trouvez votre prochaine collaboration musicale
-              </p>
             </div>
 
             <div className="space-y-6">
               {mockProjects.map((project) => (
-                <div key={project.id} className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 border border-ml-light-gray/20">
-                  <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between">
+                <div key={project.id} className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-ml-light-gray/20">
+                  <div className="flex justify-between items-start mb-4">
                     <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-4">
-                        <Badge variant="secondary" className="bg-ml-teal/10 text-ml-teal border-ml-teal/20">
-                          {project.category}
-                        </Badge>
-                        <Badge variant="outline" className="text-green-600 border-green-200 bg-green-50">
-                          Ouvert
-                        </Badge>
+                      <div className="flex items-center gap-3 mb-2">
+                        <h3 className="text-xl font-bold text-ml-charcoal">{project.title}</h3>
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                          project.status === 'Ouvert' 
+                            ? 'bg-green-100 text-green-700' 
+                            : 'bg-orange-100 text-orange-700'
+                        }`}>
+                          {project.status}
+                        </span>
                       </div>
                       
-                      <h3 className="text-2xl font-bold text-ml-charcoal mb-2 hover:text-ml-teal transition-colors cursor-pointer">
-                        {project.title}
-                      </h3>
-                      
-                      <p className="text-ml-charcoal/60 mb-2">Par {project.author}</p>
-                      
-                      <p className="text-ml-charcoal/80 mb-6 leading-relaxed">
-                        {project.description}
-                      </p>
-                      
-                      <div className="flex flex-wrap gap-6 text-sm text-ml-charcoal/60">
+                      <div className="flex items-center gap-4 text-sm text-ml-charcoal/60 mb-3">
                         <div className="flex items-center">
-                          <DollarSign className="h-4 w-4 mr-1 text-ml-teal" />
-                          <span>Budget: {project.budget}</span>
+                          <User className="h-4 w-4 mr-1" />
+                          {project.author}
                         </div>
                         <div className="flex items-center">
-                          <MapPin className="h-4 w-4 mr-1 text-ml-teal" />
-                          <span>{project.location}</span>
+                          <Calendar className="h-4 w-4 mr-1" />
+                          {project.postedAt}
                         </div>
-                        <div className="flex items-center">
-                          <Calendar className="h-4 w-4 mr-1 text-ml-teal" />
-                          <span>{project.deadline}</span>
-                        </div>
+                        {project.location && (
+                          <div className="flex items-center">
+                            <MapPin className="h-4 w-4 mr-1" />
+                            {project.location}
+                          </div>
+                        )}
                       </div>
                     </div>
                     
-                    <div className="mt-6 lg:mt-0 lg:ml-8">
-                      <Button className="bg-ml-teal hover:bg-ml-navy rounded-xl px-6">
-                        Candidater
+                    <span className="bg-ml-teal/10 text-ml-teal px-3 py-1 rounded-full text-sm font-medium">
+                      {project.category}
+                    </span>
+                  </div>
+
+                  <p className="text-ml-charcoal/70 mb-4 leading-relaxed">
+                    {project.description}
+                  </p>
+
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-ml-charcoal/60">
+                      {project.applicants} candidatures reçues
+                    </span>
+                    
+                    <div className="flex gap-3">
+                      <Button variant="outline" size="sm" className="rounded-full">
+                        Voir détails
+                      </Button>
+                      <Button size="sm" className="bg-ml-teal hover:bg-ml-navy rounded-full">
+                        Postuler
                       </Button>
                     </div>
                   </div>
