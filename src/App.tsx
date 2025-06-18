@@ -11,6 +11,7 @@ import Providers from "./pages/Providers";
 import Projects from "./pages/Projects";
 import HowItWorks from "./pages/HowItWorks";
 import Legal from "./pages/Legal";
+import ArtistSetup from "./pages/ArtistSetup";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/projects" element={<Projects />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/legal" element={<Legal />} />
+          <Route path="/profile/artist-setup" element={<ArtistSetup />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

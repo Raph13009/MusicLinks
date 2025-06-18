@@ -54,7 +54,7 @@ const Header = () => {
           {/* Actions Desktop */}
           <div className="hidden md:flex items-center space-x-3">
             <Link to="/login">
-              <Button variant="ghost" size="sm" className="text-ml-charcoal/70 hover:text-ml-teal font-medium">
+              <Button variant="ghost" size="sm" className="text-ml-charcoal/70 hover:text-ml-teal hover:bg-ml-light-gray/20 font-medium">
                 Connexion
               </Button>
             </Link>
@@ -80,7 +80,7 @@ const Header = () => {
 
         {/* Menu Mobile Ouvert */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 space-y-4 bg-ml-white/95 backdrop-blur-md">
+          <div className="md:hidden py-6 space-y-6 bg-ml-white/95 backdrop-blur-md">
             <Link 
               to="/providers" 
               className="block py-2 text-ml-charcoal hover:text-ml-teal transition-colors font-medium"
@@ -102,9 +102,9 @@ const Header = () => {
             >
               Comment ça marche
             </Link>
-            <div className="pt-4 space-y-4">
+            <div className="pt-6 space-y-6">
               <Link to="/login" onClick={() => setIsMenuOpen(false)}>
-                <Button variant="outline" className="w-full rounded-full border-ml-light-gray/50">
+                <Button variant="outline" className="w-full rounded-full border-ml-light-gray/50 hover:bg-ml-light-gray/20">
                   Connexion
                 </Button>
               </Link>

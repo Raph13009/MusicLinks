@@ -25,9 +25,15 @@ const SignUp = () => {
       return;
     }
     console.log('Inscription:', formData);
-    // Simulation de création de compte réussie
-    alert('Compte créé avec succès !');
-    navigate('/providers'); // Redirection après inscription
+    
+    // Redirection selon le rôle choisi pour créer le profil
+    if (formData.role === 'artist') {
+      navigate('/profile/artist-setup');
+    } else if (formData.role === 'provider') {
+      navigate('/profile/provider-setup');
+    } else if (formData.role === 'partner') {
+      navigate('/profile/partner-setup');
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,8 +47,8 @@ const SignUp = () => {
     <div className="min-h-screen bg-gradient-to-br from-ml-charcoal via-ml-navy to-ml-charcoal flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Header avec logo */}
-        <div className="text-center mb-12">
-          <Link to="/" className="inline-flex items-center text-white/70 hover:text-white mb-8 transition-colors">
+        <div className="text-center mb-8 md:mb-12">
+          <Link to="/" className="inline-flex items-center text-white/70 hover:text-white mb-6 md:mb-8 transition-colors">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Retour à l'accueil
           </Link>
@@ -50,22 +56,22 @@ const SignUp = () => {
           <img 
             src="/lovable-uploads/d0150788-e222-4864-8f33-659fe58eafee.png" 
             alt="MusicLinks" 
-            className="h-12 w-auto mx-auto mb-8"
+            className="h-8 md:h-12 w-auto mx-auto mb-6 md:mb-8"
           />
           
-          <h1 className="text-3xl font-bold text-white mb-2">
+          <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
             Créer un compte
           </h1>
-          <p className="text-white/70">
+          <p className="text-white/70 text-sm md:text-base">
             Rejoignez la communauté MusicLinks
           </p>
         </div>
 
         {/* Formulaire */}
-        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/10">
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 md:p-8 border border-white/10">
+          <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="name" className="text-white font-medium">Nom complet ou nom d'artiste</Label>
+              <Label htmlFor="name" className="text-white font-medium text-sm md:text-base">Nom complet ou nom d'artiste</Label>
               <Input
                 id="name"
                 name="name"
@@ -78,7 +84,7 @@ const SignUp = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-white font-medium">Email</Label>
+              <Label htmlFor="email" className="text-white font-medium text-sm md:text-base">Email</Label>
               <Input
                 id="email"
                 name="email"
@@ -92,7 +98,7 @@ const SignUp = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-white font-medium">Mot de passe</Label>
+              <Label htmlFor="password" className="text-white font-medium text-sm md:text-base">Mot de passe</Label>
               <Input
                 id="password"
                 name="password"
@@ -106,7 +112,7 @@ const SignUp = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword" className="text-white font-medium">Confirmer le mot de passe</Label>
+              <Label htmlFor="confirmPassword" className="text-white font-medium text-sm md:text-base">Confirmer le mot de passe</Label>
               <Input
                 id="confirmPassword"
                 name="confirmPassword"
@@ -120,7 +126,7 @@ const SignUp = () => {
             </div>
 
             <div className="space-y-4">
-              <Label className="text-white font-medium">Type de profil</Label>
+              <Label className="text-white font-medium text-sm md:text-base">Type de profil</Label>
               <div className="space-y-3">
                 {[
                   { value: 'artist', label: 'Artiste' },
@@ -137,7 +143,7 @@ const SignUp = () => {
                       onChange={handleChange}
                       className="text-ml-teal focus:ring-ml-teal bg-transparent border-white/30"
                     />
-                    <Label htmlFor={option.value} className="text-white font-normal cursor-pointer flex-1">
+                    <Label htmlFor={option.value} className="text-white font-normal cursor-pointer flex-1 text-sm md:text-base">
                       {option.label}
                     </Label>
                   </div>
@@ -154,14 +160,14 @@ const SignUp = () => {
                 }
                 className="border-white/30 data-[state=checked]:bg-ml-teal data-[state=checked]:border-ml-teal"
               />
-              <Label htmlFor="acceptTerms" className="text-white/80 text-sm cursor-pointer">
+              <Label htmlFor="acceptTerms" className="text-white/80 text-xs md:text-sm cursor-pointer">
                 J'accepte les CGU et la politique de confidentialité (RGPD)
               </Label>
             </div>
 
             <Button 
               type="submit" 
-              className="w-full bg-ml-teal hover:bg-ml-teal/90 text-white font-semibold py-3 rounded-xl text-lg transition-all duration-300 hover:shadow-lg"
+              className="w-full bg-ml-teal hover:bg-ml-teal/90 text-white font-semibold py-3 rounded-xl text-base md:text-lg transition-all duration-300 hover:shadow-lg"
               disabled={!formData.acceptTerms}
             >
               Créer mon compte
@@ -169,17 +175,17 @@ const SignUp = () => {
           </form>
 
           {/* Social Login */}
-          <div className="mt-8">
-            <div className="relative">
+          <div className="mt-6 md:mt-8">
+            <div className="relative mb-6">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-white/20" />
               </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-transparent text-white/70">Ou continuer avec</span>
+              <div className="relative flex justify-center">
+                <span className="px-4 bg-gradient-to-br from-ml-charcoal via-ml-navy to-ml-charcoal text-white/70 text-sm">Ou continuer avec</span>
               </div>
             </div>
 
-            <div className="mt-6 space-y-3">
+            <div className="space-y-3">
               <Button variant="outline" className="w-full bg-white/10 border-white/20 text-white hover:bg-white/20 rounded-xl py-3 transition-all duration-300">
                 <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                   <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -195,16 +201,10 @@ const SignUp = () => {
                 </svg>
                 Continuer avec Facebook
               </Button>
-              <Button variant="outline" className="w-full bg-white/10 border-white/20 text-white hover:bg-white/20 rounded-xl py-3 transition-all duration-300">
-                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.404-5.958 1.404-5.958s-.359-.719-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.097.118.111.221.082.343-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-11.987C24.007 5.367 18.641.001 12.017.001z"/>
-                </svg>
-                Continuer avec Apple
-              </Button>
             </div>
           </div>
 
-          <div className="text-center mt-8">
+          <div className="text-center mt-6 md:mt-8">
             <p className="text-white/70 text-sm">
               Vous avez déjà un compte ?{' '}
               <Link to="/login" className="text-ml-teal hover:text-ml-teal/80 font-medium transition-colors">

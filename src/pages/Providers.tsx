@@ -4,10 +4,12 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Search, MapPin, Star, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Search, MapPin, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Providers = () => {
   const [selectedCategory, setSelectedCategory] = useState('audio');
+  const [selectedFilter, setSelectedFilter] = useState('all');
 
   const categories = [
     { id: 'audio', name: 'Audio & Son', count: 120 },
@@ -115,18 +117,29 @@ const Providers = () => {
                       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-ml-charcoal/40 h-5 w-5" />
                       <Input
                         placeholder="Rechercher un service..."
-                        className="pl-10 border-ml-light-gray/30 focus:border-ml-teal rounded-xl"
+                        className="pl-10 border-ml-light-gray/30 focus:border-ml-teal focus:ring-ml-teal rounded-xl"
                       />
                     </div>
                   </div>
-                  <div>
+                  <div className="space-y-2">
                     <div className="relative">
                       <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-ml-charcoal/40 h-5 w-5" />
                       <Input
                         placeholder="Localisation"
-                        className="pl-10 border-ml-light-gray/30 focus:border-ml-teal rounded-xl"
+                        className="pl-10 border-ml-light-gray/30 focus:border-ml-teal focus:ring-ml-teal rounded-xl"
                       />
                     </div>
+                    <Select value={selectedFilter} onValueChange={setSelectedFilter}>
+                      <SelectTrigger className="text-sm border-ml-light-gray/30 focus:border-ml-teal rounded-xl">
+                        <SelectValue placeholder="Filtrer par..." />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white border border-ml-light-gray/30 rounded-xl shadow-lg">
+                        <SelectItem value="all">Tous les prestataires</SelectItem>
+                        <SelectItem value="verified">Vérifiés uniquement</SelectItem>
+                        <SelectItem value="available">Disponibles maintenant</SelectItem>
+                        <SelectItem value="top-rated">Mieux notés</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                   <Button className="bg-ml-teal hover:bg-ml-navy rounded-xl">
                     <Search className="h-4 w-4 mr-2" />
@@ -173,7 +186,7 @@ const Providers = () => {
                     variant="outline"
                     size="sm"
                     onClick={() => scrollContainer('left', 'audio-scroll')}
-                    className="rounded-full"
+                    className="rounded-full border-ml-light-gray/30 hover:bg-ml-light-gray/20"
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
@@ -181,7 +194,7 @@ const Providers = () => {
                     variant="outline"
                     size="sm"
                     onClick={() => scrollContainer('right', 'audio-scroll')}
-                    className="rounded-full"
+                    className="rounded-full border-ml-light-gray/30 hover:bg-ml-light-gray/20"
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
@@ -207,7 +220,7 @@ const Providers = () => {
                       <div className="flex items-center justify-between mb-2">
                         <h3 className="text-xl font-bold text-ml-charcoal">{provider.name}</h3>
                         <div className="flex items-center">
-                          <Star className="h-4 w-4 text-orange-400 fill-current" />
+                          <Star className="h-4 w-4 text-ml-teal fill-current" />
                           <span className="text-sm font-medium text-ml-charcoal ml-1">{provider.rating}</span>
                         </div>
                       </div>
@@ -243,7 +256,7 @@ const Providers = () => {
                     variant="outline"
                     size="sm"
                     onClick={() => scrollContainer('left', 'video-scroll')}
-                    className="rounded-full"
+                    className="rounded-full border-ml-light-gray/30 hover:bg-ml-light-gray/20"
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
@@ -251,7 +264,7 @@ const Providers = () => {
                     variant="outline"
                     size="sm"
                     onClick={() => scrollContainer('right', 'video-scroll')}
-                    className="rounded-full"
+                    className="rounded-full border-ml-light-gray/30 hover:bg-ml-light-gray/20"
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
@@ -277,7 +290,7 @@ const Providers = () => {
                       <div className="flex items-center justify-between mb-2">
                         <h3 className="text-xl font-bold text-ml-charcoal">{provider.name}</h3>
                         <div className="flex items-center">
-                          <Star className="h-4 w-4 text-orange-400 fill-current" />
+                          <Star className="h-4 w-4 text-ml-teal fill-current" />
                           <span className="text-sm font-medium text-ml-charcoal ml-1">{provider.rating}</span>
                         </div>
                       </div>
