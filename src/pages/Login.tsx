@@ -4,21 +4,17 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Checkbox } from '@/components/ui/checkbox';
 import { ArrowLeft } from 'lucide-react';
 
-const SignUp = () => {
+const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
-    password: '',
-    name: '',
-    role: '',
-    acceptTerms: false
+    password: ''
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Inscription:', formData);
+    console.log('Connexion:', formData);
     // Ici on intégrerait avec Supabase plus tard
   };
 
@@ -46,10 +42,10 @@ const SignUp = () => {
           />
           
           <h1 className="text-3xl font-bold text-white mb-2">
-            Créer un compte
+            Bon retour !
           </h1>
           <p className="text-white/70">
-            Rejoignez la communauté MusicLinks
+            Connectez-vous à votre compte
           </p>
         </div>
 
@@ -84,65 +80,11 @@ const SignUp = () => {
               />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="name" className="text-white font-medium">Nom complet ou nom d'artiste</Label>
-              <Input
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-ml-teal focus:ring-ml-teal rounded-xl"
-                placeholder="John Doe"
-              />
-            </div>
-
-            <div className="space-y-4">
-              <Label className="text-white font-medium">Type de profil</Label>
-              <div className="space-y-3">
-                {[
-                  { value: 'artist', label: 'Artiste' },
-                  { value: 'provider', label: 'Prestataire' },
-                  { value: 'partner', label: 'Partenaire stratégique (label, manager...)' }
-                ].map((option) => (
-                  <div key={option.value} className="flex items-center space-x-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
-                    <input
-                      type="radio"
-                      id={option.value}
-                      name="role"
-                      value={option.value}
-                      checked={formData.role === option.value}
-                      onChange={handleChange}
-                      className="text-ml-teal focus:ring-ml-teal bg-transparent border-white/30"
-                    />
-                    <Label htmlFor={option.value} className="text-white font-normal cursor-pointer flex-1">
-                      {option.label}
-                    </Label>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-3">
-              <Checkbox
-                id="acceptTerms"
-                checked={formData.acceptTerms}
-                onCheckedChange={(checked) => 
-                  setFormData({ ...formData, acceptTerms: checked as boolean })
-                }
-                className="border-white/30 data-[state=checked]:bg-ml-teal data-[state=checked]:border-ml-teal"
-              />
-              <Label htmlFor="acceptTerms" className="text-white/80 text-sm cursor-pointer">
-                J'accepte les CGU et la politique de confidentialité (RGPD)
-              </Label>
-            </div>
-
             <Button 
               type="submit" 
               className="w-full bg-ml-teal hover:bg-ml-teal/90 text-white font-semibold py-3 rounded-xl text-lg transition-all duration-300 hover:shadow-lg"
-              disabled={!formData.acceptTerms}
             >
-              Créer mon compte
+              Se connecter
             </Button>
           </form>
 
@@ -184,9 +126,9 @@ const SignUp = () => {
 
           <div className="text-center mt-8">
             <p className="text-white/70 text-sm">
-              Vous avez déjà un compte ?{' '}
-              <Link to="/login" className="text-ml-teal hover:text-ml-teal/80 font-medium transition-colors">
-                Se connecter
+              Pas encore de compte ?{' '}
+              <Link to="/signup" className="text-ml-teal hover:text-ml-teal/80 font-medium transition-colors">
+                S'inscrire
               </Link>
             </p>
           </div>
@@ -196,4 +138,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;
